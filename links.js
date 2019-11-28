@@ -1,9 +1,19 @@
+// constructor function
+function link(url, id) {
+    this.url = url;
+    this.id = id;
+}
+
 var links = new Array();
 
 window.onload = init;
 
 function init() {
+    // grab JSON
     getLinkData();
+    // set up form processing
+    var submitButton = document.getElementById("submit");
+    submitButton.onclick = getFormData;
 }
 
 function getLinkData() {
@@ -46,12 +56,40 @@ function parseLinkItems(linkJSON) {
 }
 
 function addLinksToPage() {
-    var ul = document.getElementById("link-list");
     for (var i = 0; i < links.length; i++) {
         var linkItem = links[i];
-        var li = document.createElement("li");
-        li.innerHTML =
-            linkItem.id + " redir to " + linkItem.url;
-        ul.appendChild(li);
+        addLinkToPage(linkItem);
     }
-}    
+}
+
+function addLinkToPage(linkItem) {
+    var ul = document.getElementById("link-list");
+    var li = document.createElement("li");
+    li.innerHTML =
+        linkItem.id + " redir to " + linkItem.url;
+    ul.appendChild(li);
+}
+
+function getFormData() {
+    var url = document.getElementById("linkURL").value;
+    var id = document.getElementById("linkID").value;
+    // TODO: validate URL and ID
+    if (url && id) {
+        var linkItem = new link(url,id);
+        links.push(linkItem);
+        addLinkToPage(linkItem)
+        // clean up the form
+        document.forms[0].reset();
+        // save new file
+        saveLinks();
+    }
+}
+
+function saveLinks() {
+    var linksJSON = JSON.stringify(links);
+    var request = new XMLHttpRequest();
+    var URL = "save.php?data=" + encodeURI(linksJSON);
+    request.open("GET", URL);
+    request.setRequestHeader("Content-Type","text/plain;charset=UTF-8");
+    request.send();
+}
