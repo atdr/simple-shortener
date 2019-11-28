@@ -1,3 +1,5 @@
+var links = new Array();
+
 window.onload = init;
 
 function init() {
