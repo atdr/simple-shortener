@@ -8,28 +8,14 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.0/css/bootstrap.min.css" integrity="sha384-SI27wrMjH3ZZ89r4o+fGIJtnzkAnFs3E4qz9DIYioCQ5l9Rd/7UAa8DHcaL8jkWt" crossorigin="anonymous">
 
-        <title>Simple Shortener - Admin</title>
+        <title>Simple Shortener</title>
 
         <!-- my JS -->
         <script src="links.js"></script>
     </head>
-    <body onload="admin_init();">
+    <body onload="main_init();">
         <div class="container">
-            <h1>Simple Shortener</h1>
-
             <ul id="link-list"></ul>
-
-            <form>
-                <div class="form-group">
-                <label for="linkURL">Link</label>
-                <input type="url" class="form-control" id="linkURL" placeholder="http://atdr.uk" required>
-                </div>
-                <div class="form-group">
-                <label for="linkID">Short code</label>
-                <input type="text" class="form-control" id="linkID" placeholder="foo-bar" required>
-                </div>
-                <button id="submit" type="submit" class="btn btn-primary">Submit</button>
-            </form>
         </div>
 
         <!-- Optional JavaScript -->

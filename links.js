@@ -6,14 +6,17 @@ function link(url, id) {
 
 var links = new Array();
 
-window.onload = init;
-
-function init() {
+function admin_init() {
     // grab JSON
-    getLinkData();
+    getLinkData();    
     // set up form processing
     var submitButton = document.getElementById("submit");
     submitButton.onclick = getFormData;
+}
+
+function main_init() {
+    getLinkData();
+    console.log(links);  
 }
 
 function getLinkData() {
@@ -26,6 +29,7 @@ function getLinkData() {
             if (this.responseText) { 
                 // send response to parser
                 parseLinkItems(this.responseText);
+                processLinkRedirect();
                 addLinksToPage();
             }
             else {
@@ -52,6 +56,22 @@ function parseLinkItems(linkJSON) {
     for (var i = 0; i < linkArray.length; i++) {
         var linkItem = linkArray[i];
         links.push(linkItem);
+    }
+}
+
+function processLinkRedirect() {
+    // grab the hash
+    id = window.location.hash;
+    id = id.substr(1); // remove # character
+    if (id) {
+        getLinkData();
+        // get data for this link
+        var thisLink = links.find((link) => { return link.id === id; });
+        if (thisLink) {
+            location.href = thisLink.url;
+        }
+    } else {
+        // TODO: if there isn't an id
     }
 }
 
