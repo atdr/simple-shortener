@@ -51,7 +51,7 @@ function addLinksToPage() {
         var linkItem = links[i];
         var li = document.createElement("li");
         li.innerHTML =
-            linkItem.id + " redir to " + todoItem.url;
+            linkItem.id + " redir to " + linkItem.url;
         ul.appendChild(li);
     }
 }    
