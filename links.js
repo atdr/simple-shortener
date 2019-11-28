@@ -42,6 +42,17 @@ function parseLinkItems(linkJSON) {
         var linkItem = linkArray[i];
         links.push(linkItem);
     }
-    console.log("To-do array: ");
+    console.log("Link array: ");
     console.log(links);
 }
+
+function addLinksToPage() {
+    var ul = document.getElementById("link-list");
+    for (var i = 0; i < links.length; i++) {
+        var linkItem = links[i];
+        var li = document.createElement("li");
+        li.innerHTML =
+            linkItem.id + " redir to " + todoItem.url;
+        ul.appendChild(li);
+    }
+}    
