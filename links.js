@@ -16,6 +16,7 @@ function getLinkData() {
             if (this.responseText) { 
                 // send response to parser
                 parseLinkItems(this.responseText);
+                addLinksToPage();
             }
             else {
                 // print error
@@ -42,8 +43,6 @@ function parseLinkItems(linkJSON) {
         var linkItem = linkArray[i];
         links.push(linkItem);
     }
-    console.log("Link array: ");
-    console.log(links);
 }
 
 function addLinksToPage() {
